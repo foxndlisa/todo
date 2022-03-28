@@ -39,9 +39,9 @@ export default {
 <style lang="scss" scoped>
   .todoform{
     padding: 32px;
-    min-width: 400px;
     background: #fff;
     border-radius: 16px;
+    margin: 0 16px;
     &__title{
       margin-bottom: 16px;
     }

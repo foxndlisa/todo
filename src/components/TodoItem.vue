@@ -42,8 +42,8 @@ export default {
     align-items: center;
   }
   &__checkbox{
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
     margin-right: 16px;
   }
   .completed{

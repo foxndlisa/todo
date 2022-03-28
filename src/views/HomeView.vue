@@ -68,7 +68,9 @@ export default {
   .popup{
     display: grid;
     place-items: center;
-    position: absolute;
+    position: fixed;
+    height: 100%;
+    overflow: hidden;
     top: 0;
     left: 0;
     right: 0;

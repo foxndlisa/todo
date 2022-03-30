@@ -1,24 +1,31 @@
 <template>
   <div>
-    <!-- <button @click="setTodo">Add todo</button> -->
     <div class="todolist">
-      <todo-item
-        v-for="todo in todosUncompleted"
-        :key='todo.id'
-        v-bind:class="{ completed: todo.completed }"
-        :todo='todo'
-        @completedChange='setCompleted'
-      />
+      <TransitionGroup>
+        <todo-item
+          v-for="todo in todosUncompleted"
+          :key='todo.id'
+          v-bind:class="{ completed: todo.completed }"
+          :todo='todo'
+          @completedChange='setCompleted'
+        />
+      </TransitionGroup>
     </div>
     <h2>Completed</h2>
     <div class="todolist">
-      <todo-item
-        v-for="todo in todosCompleted"
-        :key='todo.id'
-        v-bind:class="{ completed: todo.completed }"
-        :todo='todo'
-        @completedChange='setCompleted'
-      />
+      <TransitionGroup>
+        <todo-item
+          v-for="todo in todosCompleted"
+          :key='todo.id'
+          v-bind:class="{ completed: todo.completed }"
+          :todo='todo'
+          @completedChange='setCompleted'
+        >
+          <template v-slot:controls>
+            <img @click="deleteTodo(todo.id)" class="delBtn" src="@/assets/remove.png" />
+          </template>
+        </todo-item>
+      </TransitionGroup>
     </div>
   </div>
 </template>
@@ -31,12 +38,16 @@ export default {
     todosCompleted: Array,
     todosUncompleted: Array
   },
-  setup (props) {
+  setup (props, { emit }) {
     const setCompleted = (id) => {
       props.todos.find(todo => todo.id === id).completed = !props.todos.find(todo => todo.id === id).completed
     }
+    const deleteTodo = (id) => {
+      emit('delete', id)
+    }
     return {
-      setCompleted
+      setCompleted,
+      deleteTodo
     }
   },
   components: {
@@ -46,5 +57,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-leave-from,
+.v-enter-to,
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
 
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.completed{
+  color: #ccc;
+}
+
+.delBtn{
+  margin-left: auto;
+  text-decoration: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
 </style>

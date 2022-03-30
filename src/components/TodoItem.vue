@@ -9,6 +9,7 @@
         :id="'checkbox' + todo.id"
       />
       <label :for="'checkbox' + todo.id">{{titleUpper}}</label>
+      <slot name="controls"></slot>
     </div>
 </template>
 
@@ -34,6 +35,7 @@ export default {
 <style lang="scss" scoped>
 .todolist{
   &__item{
+    font-weight: 600;
     padding: 16px;
     margin: 16px 0;
     border: 1px solid black;
@@ -45,9 +47,6 @@ export default {
     min-width: 20px;
     min-height: 20px;
     margin-right: 16px;
-  }
-  .completed{
-    text-decoration: line-through;
   }
 }
 </style>

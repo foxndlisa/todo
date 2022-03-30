@@ -1,4 +1,4 @@
-import { ref, onMounted, computed } from 'vue'
+import { onMounted, computed, ref } from 'vue'
 import axios from 'axios'
 export function fetchTodo () {
   const todos = ref([])

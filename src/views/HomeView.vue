@@ -11,6 +11,7 @@
       :todos='todos'
       :todosCompleted='todosCompleted'
       :todosUncompleted='todosUncompleted'
+      @delete="deleteTodo"
     />
   </div>
 </template>
@@ -27,7 +28,9 @@ export default {
     const createTodo = (todo) => {
       todos.value.push(todo)
       popupShow()
-      // Багулина тут
+    }
+    const deleteTodo = (id) => {
+      todos.value = todos.value.filter(todo => todo.id !== id)
     }
     const isPopupShow = ref(false)
     const popupShow = () => { isPopupShow.value = !isPopupShow.value }
@@ -37,7 +40,8 @@ export default {
       todosCompleted,
       todosUncompleted,
       todos,
-      createTodo
+      createTodo,
+      deleteTodo
     }
   },
   name: 'HomeView',

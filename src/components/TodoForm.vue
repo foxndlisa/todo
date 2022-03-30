@@ -13,15 +13,15 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { Guid } from 'js-guid'
 
 export default {
   setup (props, { emit }) {
-    const todo = reactive({})
+    const todo = { title: '' }
     const setTodo = () => {
-      todo.id = Date.now()
+      todo.id = Guid.newGuid().toString()
       todo.completed = false
-      emit('create', todo)
+      emit('create', { ...todo })
     }
 
     return {

@@ -1,22 +1,21 @@
 <template>
     <div class='todolist__item'>
-      <input
-        class="todolist__checkbox"
-        type="checkbox"
-        :checked="todo.completed"
-        :value="todo.id"
+      <my-check-box
+        :checked="completed"
         @change="sendChange"
-        :id="'checkbox' + todo.id"
-      />
-      <label :for="'checkbox' + todo.id">{{titleUpper}}</label>
+      >
+        {{titleUpper}}
+      </my-check-box>
       <slot name="controls"></slot>
     </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+import MyCheckBox from '@/components/UI/MyCheckBox'
 
 export default {
+  components: { MyCheckBox },
   props: {
     todo: Object
   },
@@ -24,9 +23,10 @@ export default {
     const sendChange = () => {
       emit('completedChange', props.todo.id)
     }
+    const completed = computed(() => { return props.todo.completed })
     const titleUpper = computed(() => { return props.todo.title.charAt(0).toUpperCase() + props.todo.title.slice(1) })
     return {
-      titleUpper, sendChange
+      titleUpper, sendChange, completed
     }
   }
 }
@@ -42,11 +42,6 @@ export default {
     border-radius: 8px;
     display: flex;
     align-items: center;
-  }
-  &__checkbox{
-    min-width: 20px;
-    min-height: 20px;
-    margin-right: 16px;
   }
 }
 </style>

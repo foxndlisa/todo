@@ -5,7 +5,6 @@
         <todo-item
           v-for="todo in todosUncompleted"
           :key='todo.id'
-          v-bind:class="{ completed: todo.completed }"
           :todo='todo'
           @completedChange='setCompleted'
         />
@@ -17,7 +16,6 @@
         <todo-item
           v-for="todo in todosCompleted"
           :key='todo.id'
-          v-bind:class="{ completed: todo.completed }"
           :todo='todo'
           @completedChange='setCompleted'
         >
@@ -61,16 +59,16 @@ export default {
 .v-enter-to,
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
 }
-
-.completed{
-  color: #ccc;
+.v-leave-from,
+.v-enter-to {
+  opacity: 1;
 }
 
 .delBtn{
